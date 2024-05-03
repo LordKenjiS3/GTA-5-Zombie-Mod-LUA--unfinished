@@ -63,12 +63,12 @@ function DebugTABLE(tbl, parentName, indent)
     for key, value in pairs(tbl) do
         local formattedKey = parentName .. " > " .. tostring(key)
         if type(value) == "table" then
-            System:Warning(formattedKey)
+            print(formattedKey)
             DebugTABLE(value, formattedKey, indent + 1)
         elseif type(value) == "function" then
-            System:Warning(formattedKey .. " > "..type(value))
+            print(formattedKey .. " > "..type(value))
         else
-            System:Warning(formattedKey .. " > " .. tostring(value) .. " > " .. type(value))
+            print(formattedKey .. " > " .. tostring(value) .. " > " .. type(value))
         end
     end
 end
@@ -82,7 +82,7 @@ function DebugTABLE_onlyFunctions(tbl, parentName, indent)
 			if type(value) == "table" then
 				DebugTABLE_onlyFunctions(value, formattedKey, indent + 1)
 			elseif type(value) == "function" then
-				System:Warning(formattedKey .. " > "..type(value))
+				print(formattedKey .. " > "..type(value))
 			end
 		end
 	end
@@ -96,7 +96,7 @@ function DebugTABLE_find(tbl, parentName, indent, findName)
         -- Procurar por palavras semelhantes
         local pattern = "%w*" .. findName .. "%w*";
         if strfind(strlower(key), strlower(pattern)) then
-            System:Warning(formattedKey .. " > " .. tostring(value).."   Type:   "..type(value));
+            print(formattedKey .. " > " .. tostring(value).."   Type:   "..type(value));
         end
         if type(value) == "table" then
 			local check=function(ss)
@@ -123,10 +123,10 @@ end
 function CheckValueExistence(valuesTable)
 	if type(valuesTable) == "table" then
 		for i,val in ipairs(valuesTable) do
-			System:Warning("INDEX:  "..i.."   Value:  "..val.."    type:  "..type(val))
+			print("INDEX:  "..i.."   Value:  "..val.."    type:  "..type(val))
 		end
 	else
-		System:Warning("VALUE:  "..valuesTable.."  TYPE:  "..type(valuesTable))
+		print("VALUE:  "..valuesTable.."  TYPE:  "..type(valuesTable))
 	end
 end
 
